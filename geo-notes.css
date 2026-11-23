@@ -1,12 +1,12 @@
 /* Annotations datashake (maquette). Rouge des pastilles = format validé des maquettes GEO. */
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600&display=swap');
 :root{--geo:#d1004b;--geo-dark:#a30039;--geo-soft:#fff0f4;--geo-line:#ffb9cd}
-.geo-row{display:flex;gap:40px;align-items:flex-start;width:100%}
-.geo-row>.geo-mark{flex:1 1 auto;min-width:0}
+.geo-row{position:relative;width:100%}
 .geo-mark{position:relative}
 .geo-mark::before{content:'';position:absolute;inset:-12px;border:2px dashed var(--geo);border-radius:12px;pointer-events:none}
-.geo-badge{position:absolute;top:-24px;left:-24px;z-index:20;width:32px;height:32px;border-radius:50%;background:var(--geo);color:#fff;border:2px solid #fff;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(209,0,75,.4)}
-.geo-note{flex:0 0 250px;position:relative;margin-top:-12px;background:#fff;border:1px solid var(--geo-line);border-left:4px solid var(--geo);border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:19px;color:#3f3f46;font-weight:400}
+.geo-badge{position:absolute;top:-24px;left:-24px;z-index:20;width:32px;height:32px;border-radius:50%;background:var(--geo);color:#fff;border:2px solid #fff;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(209,0,75,.18),0 4px 12px rgba(209,0,75,.4);cursor:pointer;padding:0;transition:box-shadow .2s,transform .2s}
+.geo-badge:hover,.geo-badge:focus-visible,.geo-row.open .geo-badge{box-shadow:0 0 0 7px rgba(209,0,75,.25),0 4px 12px rgba(209,0,75,.4);transform:scale(1.08);outline:none}
+.geo-note{display:none;position:absolute;z-index:40;top:16px;left:16px;width:300px;max-width:calc(100vw - 32px);box-shadow:0 12px 32px rgba(0,0,0,.18);background:#fff;border:1px solid var(--geo-line);border-left:4px solid var(--geo);border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:19px;color:#3f3f46;font-weight:400}
 .geo-note .n{display:inline-flex;width:22px;height:22px;border-radius:50%;background:var(--geo);color:#fff;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:11px;align-items:center;justify-content:center;margin-right:8px;vertical-align:1px}
 .geo-note b{color:var(--geo-dark);font-weight:700}
 .geo-note p{margin:8px 0 0}
@@ -25,7 +25,10 @@
 .wysiwyg-rendering .lesc-faq h3{margin-top:8px}
 .wysiwyg-rendering .geo-mark>*+*{margin-top:1.25rem}
 .wysiwyg-rendering .geo-mark table td{text-align:left!important;vertical-align:top}
-@media (max-width:1023px){.geo-row{flex-direction:column;gap:24px}.geo-note{flex:none;width:100%;margin-top:8px}}
+.geo-row.open .geo-note{display:block}
+.geo-row.open{z-index:50}
+@media (hover:hover) and (min-width:1024px){.geo-row:has(>.geo-mark>.geo-badge:hover) .geo-note,.geo-note:hover{display:block}.geo-row:has(>.geo-mark>.geo-badge:hover){z-index:50}}
+@media (max-width:1023px){.geo-note{left:0;top:20px;width:min(300px,100%)}}
 .geo-mark .wysiwyg-rendering a,.wysiwyg-rendering .geo-mark a{display:inline}
 .wysiwyg-rendering .geo-row+.geo-row{margin-top:32px}
 .wysiwyg-rendering .lesc-faq h3:not(:first-of-type){margin-top:24px}
